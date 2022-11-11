@@ -14,9 +14,8 @@
 <div class="container emp-profile">
     <t:button href="${pageContext.request.contextPath}/logout" text="Log out"/>
     <t:button href="${pageContext.request.contextPath}/update" text="Edit my profile"/>
-    <t:button id="delete" href="${pageContext.request.contextPath}/delete" text="Delete my account"/>
     <t:button href="${pageContext.request.contextPath}/feed" text="See recommendations"/>
-
+    <a href="${pageContext.request.contextPath}/delete"><button onclick="confirm('Вы уверены что хотите удалить профиль?')">Delete my account</button></a>
     <c:if test="${isAdmin == true}">
         <a href="${pageContext.request.contextPath}/adminPanel">
             <button>Go to Admin Panel</button>

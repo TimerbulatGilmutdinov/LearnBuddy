@@ -2,15 +2,19 @@ package ru.kpfu.itis.semestrproject.services;
 
 import com.twmacinta.util.MD5;
 import ru.kpfu.itis.semestrproject.models.User;
+import ru.kpfu.itis.semestrproject.repositories.UserSubjectRepository;
 import ru.kpfu.itis.semestrproject.repositories.UsersRepository;
 
 public class SecurityService {
     private UsersRepository usersRepository;
+    private UserSubjectRepository userSubjectRepository;
 
-    public SecurityService(UsersRepository usersRepository){
+    public SecurityService(UsersRepository usersRepository, UserSubjectRepository userSubjectRepository){
         this.usersRepository = usersRepository;
+        this.userSubjectRepository = userSubjectRepository;
     }
     public void deleteUser(User user){
+        userSubjectRepository.deleteUserById(user.getId());
         usersRepository.deleteUserById(user.getId());
     }
     public String getHash(String pass){

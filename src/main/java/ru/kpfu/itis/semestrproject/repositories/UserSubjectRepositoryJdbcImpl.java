@@ -19,6 +19,7 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
     private static final String SQL_FIND_BY_USER_ID = "select * from user_subject where user_id=?";
     private static final String SQL_ADD_DEFAULT_SUBJECT_VALUES_TO_USER = "insert into user_subject values(?,?,?,?,?,?,?,?)";
     private static final String SQL_SET_SUBJECT_VALUE_TO_USER = "update user_subject set maths = ?, physics = ?, programming = ?, english_language = ?, history = ?, economics = ?, law = ? where user_id=?";
+    private static final String SQL_DELETE_USER_BY_ID = "delete from user_subject where user_id = ?";
 
     private final DataSource dataSource;
 
@@ -81,7 +82,7 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USER_ID_BY_ + subject +" = true")) {
             List<Long> userIds = new ArrayList<>();
-            
+
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     UserSubject userSubject = userSubjectMapper.apply(resultSet);
@@ -145,6 +146,18 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+    @Override
+    public boolean deleteUserById(Long id) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_DELETE_USER_BY_ID)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return true;
     }
 
 }

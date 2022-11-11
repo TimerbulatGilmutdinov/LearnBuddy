@@ -12,4 +12,5 @@ public interface UserSubjectRepository {
     UserSubject findByUserId(Long userId);
     List<Long> findAllUserIdBySubject(String subject);
     List<Long> findAllUserIdByMatchingSubjects(UserSubject userSubject);
+    boolean deleteUserById(Long id);
 }

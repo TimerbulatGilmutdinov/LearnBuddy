@@ -22,21 +22,14 @@
             <div class="col-md-4">
                 <div class="profile-img">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/User_font_awesome.svg/1200px-User_font_awesome.svg.png" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file"/>
-                    </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="${pageContext.request.contextPath}/update" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="${pageContext.request.contextPath}/update/subjects" role="tab" aria-controls="profile" aria-selected="false">Subjects</a>
-                        </li>
+                        <t:navItem activity="active" href="${pageContext.request.contextPath}/update" name="About"/>
+                        <t:navItem activity="" href="${pageContext.request.contextPath}/update/subjects"
+                                   name="Subjects"/>
                     </ul>
                 </div>
             </div>

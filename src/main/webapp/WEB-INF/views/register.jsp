@@ -14,18 +14,10 @@
 <div class="registration-form">
     <form method="post">
         <h3>Registration</h3><br>
-        <div class="form-group">
-            <input type="text" name="name" class="form-control item" id="username" placeholder="Username" required>
-        </div>
-        <div class="form-group">
-            <input type="text" name="surname" class="form-control item" id="password" placeholder="Surname" required>
-        </div>
-        <div class="form-group">
-            <input type="text" name="email" class="form-control item" id="email" placeholder="Email" required>
-        </div>
-        <div class="form-group">
-            <input type="password" name="password" class="form-control item" id="phone-number" placeholder="Password" required>
-        </div>
+        <t:formGroup name="name" type="text" placeholder="Name"/>
+        <t:formGroup name="surname" type="text" placeholder="Surname"/>
+        <t:formGroup name="email" type="email" placeholder="Email"/>
+        <t:formGroup name="password" type="password" placeholder="Password"/>
         <div class="form-group">
             <label for="birthdate">Birthdate</label>
             <input id="birthdate" type="date" name="birthdate" class="form-control item" id="gender" placeholder="Birthdate" required>
@@ -49,9 +41,7 @@
                 <option value="Germany">Germany</option>
             </select><br>
         </div>
-        <div class="form-group">
-            <input type="text" name="city" class="form-control item" id="city" placeholder="City" required>
-        </div>
+        <t:formGroup name="city" type="text" placeholder="City"/>
         <button type="submit" class="btn btn-block create-account">Create Account</button>
     </form>
 </div>

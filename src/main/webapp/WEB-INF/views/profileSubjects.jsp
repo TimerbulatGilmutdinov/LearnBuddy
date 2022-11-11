@@ -31,12 +31,9 @@
             <div class="col-md-6">
                 <div class="profile-head">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link" id="home-tab" data-toggle="tab" href="${pageContext.request.contextPath}/profile" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="${pageContext.request.contextPath}/profile/subjects" role="tab" aria-controls="profile" aria-selected="false">Subjects</a>
-                        </li>
+                        <t:navItem activity="" href="${pageContext.request.contextPath}/profile" name="About"/>
+                        <t:navItem activity="active" href="${pageContext.request.contextPath}/profile/subjects"
+                                   name="Subjects"/>
                     </ul>
                 </div>
             </div>

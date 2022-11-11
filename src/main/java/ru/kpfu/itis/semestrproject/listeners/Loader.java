@@ -21,7 +21,7 @@ public class Loader implements ServletContextListener {
         sce.getServletContext().setAttribute("userSubjectRepository",new UserSubjectRepositoryJdbcImpl(new SimpleDataSource()));
         sce.getServletContext().setAttribute("usersRepository",new UsersRepositoryJdbcImpl(new SimpleDataSource()));
         sce.getServletContext().setAttribute("authService",new AuthService(new UsersRepositoryJdbcImpl(new SimpleDataSource())));
-        sce.getServletContext().setAttribute("securityService",new SecurityService(new UsersRepositoryJdbcImpl(new SimpleDataSource())));
+        sce.getServletContext().setAttribute("securityService",new SecurityService(new UsersRepositoryJdbcImpl(new SimpleDataSource()),new UserSubjectRepositoryJdbcImpl(new SimpleDataSource())));
         sce.getServletContext().setAttribute("userSubjectService", new UserSubjectService(new UsersRepositoryJdbcImpl(new SimpleDataSource()),new UserSubjectRepositoryJdbcImpl(new SimpleDataSource())));
     }
 

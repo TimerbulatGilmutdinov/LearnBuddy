@@ -23,7 +23,6 @@ public class SubjectsRepositoryJdbcImpl implements SubjectsRepository{
     }
 
     public static final Function<ResultSet, Subject> subjectMapper = row -> {
-
         try {
             Long id = row.getLong("id");
             String name = row.getString("name");
@@ -31,7 +30,6 @@ public class SubjectsRepositoryJdbcImpl implements SubjectsRepository{
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
-
     };
 
     @Override
@@ -41,8 +39,7 @@ public class SubjectsRepositoryJdbcImpl implements SubjectsRepository{
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    Subject subject = subjectMapper.apply(resultSet);
-                    return subject;
+                    return subjectMapper.apply(resultSet);
                 } else {
                     return null;
                 }
@@ -60,8 +57,7 @@ public class SubjectsRepositoryJdbcImpl implements SubjectsRepository{
             statement.setString(1, name);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    Subject subject = subjectMapper.apply(resultSet);
-                    return subject;
+                    return subjectMapper.apply(resultSet);
                 } else {
                     return null;
                 }
@@ -75,7 +71,7 @@ public class SubjectsRepositoryJdbcImpl implements SubjectsRepository{
     public boolean addSubject(Subject subject) {
         boolean result = true;
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_ADD_SUBJECT)) {
+            PreparedStatement statement = connection.prepareStatement(SQL_ADD_SUBJECT)) {
             statement.setString(1, subject.getName());
             statement.executeUpdate();
         } catch (SQLException e) {

@@ -6,8 +6,8 @@ import ru.kpfu.itis.semestrproject.repositories.UserSubjectRepository;
 import ru.kpfu.itis.semestrproject.repositories.UsersRepository;
 
 public class SecurityService {
-    private UsersRepository usersRepository;
-    private UserSubjectRepository userSubjectRepository;
+    private final UsersRepository usersRepository;
+    private final UserSubjectRepository userSubjectRepository;
 
     public SecurityService(UsersRepository usersRepository, UserSubjectRepository userSubjectRepository){
         this.usersRepository = usersRepository;

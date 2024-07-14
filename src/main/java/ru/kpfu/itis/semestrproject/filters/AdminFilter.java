@@ -26,7 +26,7 @@ public class AdminFilter extends HttpFilter {
             isAdminPage |= request.getRequestURI().equals(contextPath + page);
         }
         if (isAdminPage && !isAdmin) {
-            response.sendRedirect(contextPath+"/profile");
+            response.sendRedirect(contextPath + "/profile");
         } else {
             chain.doFilter(request, response);
         }

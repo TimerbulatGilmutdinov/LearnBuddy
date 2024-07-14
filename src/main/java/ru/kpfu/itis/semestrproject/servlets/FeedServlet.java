@@ -16,16 +16,18 @@ import java.util.List;
 @WebServlet("/feed")
 public class FeedServlet extends HttpServlet {
     private UserSubjectService userSubjectService;
+
     @Override
-    public void init(){
+    public void init() {
         userSubjectService = (UserSubjectService) getServletContext().getAttribute("userSubjectService");
     }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         UserSubject userSubject = (UserSubject) session.getAttribute("userSubject");
         List<User> foundMatchingUsers = userSubjectService.findAllMatchingUsers(userSubject);
         session.setAttribute("foundMatchingUsers", foundMatchingUsers);
-        req.getRequestDispatcher("/WEB-INF/views/feed.jsp").forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/views/feed.jsp").forward(req, resp);
     }
 }

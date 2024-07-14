@@ -1,6 +1,5 @@
 package ru.kpfu.itis.semestrproject.servlets;
 
-import com.twmacinta.util.MD5;
 import ru.kpfu.itis.semestrproject.models.User;
 import ru.kpfu.itis.semestrproject.models.UserSubject;
 import ru.kpfu.itis.semestrproject.repositories.UserSubjectRepository;
@@ -68,7 +67,7 @@ public class UpdateUserServlet extends HttpServlet {
             boolean economics = req.getParameter("economics") != null && Boolean.parseBoolean(req.getParameter("economics"));
             boolean law = req.getParameter("law") != null && Boolean.parseBoolean(req.getParameter("law"));
 
-            UserSubject updatedUserSubject = new UserSubject(userSubject.getUserId(),maths,physics,englishLanguage,programming,history,economics,law);
+            UserSubject updatedUserSubject = new UserSubject(userSubject.getUserId(), maths, physics, englishLanguage, programming, history, economics, law);
             userSubjectRepository.setSubjectValuesToUser(updatedUserSubject);
             req.getSession().setAttribute("userSubject", updatedUserSubject);
             resp.sendRedirect(req.getContextPath() + "/profile");

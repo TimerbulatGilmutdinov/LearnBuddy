@@ -14,6 +14,7 @@ import java.io.IOException;
 @WebServlet("/delete")
 public class DeleteAccountServlet extends HttpServlet {
     private SecurityService securityService;
+
     @Override
     public void init() {
         securityService = (SecurityService) getServletContext().getAttribute("securityService");

@@ -27,11 +27,10 @@ public class AdminPanelServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String email = req.getParameter("email");
         User foundUser = usersRepository.findByEmail(email);
         req.getSession().setAttribute("foundUser", foundUser);
-
         resp.sendRedirect(req.getContextPath() + "/adminPanel");
     }
 }

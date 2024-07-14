@@ -1,6 +1,5 @@
 package ru.kpfu.itis.semestrproject.services;
 
-import ru.kpfu.itis.semestrproject.models.Subject;
 import ru.kpfu.itis.semestrproject.models.User;
 import ru.kpfu.itis.semestrproject.models.UserSubject;
 import ru.kpfu.itis.semestrproject.repositories.UserSubjectRepository;

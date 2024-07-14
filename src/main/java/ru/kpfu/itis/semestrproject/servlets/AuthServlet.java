@@ -25,7 +25,7 @@ public class AuthServlet extends HttpServlet {
     @Override
     public void init() {
         this.userSubjectRepository = (UserSubjectRepository) getServletContext().getAttribute("userSubjectRepository");
-        this.usersRepository = (UsersRepository)getServletContext().getAttribute("usersRepository");
+        this.usersRepository = (UsersRepository) getServletContext().getAttribute("usersRepository");
         this.authService = (AuthService) getServletContext().getAttribute("authService");
     }
 
@@ -46,16 +46,16 @@ public class AuthServlet extends HttpServlet {
 
         if (authService.userLogIn(email, passwordHash, req)) {
             HttpSession session = req.getSession(true);
-            session.setAttribute("isAuthenticated",true);
+            session.setAttribute("isAuthenticated", true);
             User user = usersRepository.findByEmail(email);
             UserSubject userSubject = userSubjectRepository.findByUserId(user.getId());
-            session.setAttribute("user",user);
+            session.setAttribute("user", user);
             session.setAttribute("isAdmin", user.isAdmin());
-            session.setAttribute("userSubject",userSubject);
+            session.setAttribute("userSubject", userSubject);
             resp.sendRedirect((req.getContextPath()) + "/profile");
         } else {
-            req.setAttribute("email",email);
-            req.setAttribute("password",password);
+            req.setAttribute("email", email);
+            req.setAttribute("password", password);
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         }
     }

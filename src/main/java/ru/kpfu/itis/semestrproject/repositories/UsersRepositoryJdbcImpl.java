@@ -24,7 +24,6 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     }
 
     public static final Function<ResultSet, User> userMapper = row -> {
-
         try {
             Long id = row.getLong("id");
             String name = row.getString("name");
@@ -40,7 +39,6 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
-
     };
 
     private void setUserArgsToStatement(PreparedStatement statement, User user) throws SQLException {
@@ -142,14 +140,12 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     @Override
     public User findById(Long id) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_ID)) {
-
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_ID)) {
             statement.setLong(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    User user = userMapper.apply(resultSet);
-                    return user;
+                    return userMapper.apply(resultSet);
                 } else {
                     return null;
                 }

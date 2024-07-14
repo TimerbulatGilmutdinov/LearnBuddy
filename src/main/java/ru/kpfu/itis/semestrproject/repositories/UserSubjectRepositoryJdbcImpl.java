@@ -28,7 +28,6 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
     }
 
     public static final Function<ResultSet, UserSubject> userSubjectMapper = row -> {
-
         try {
             Long user_id = row.getLong("user_id");
             Boolean maths = row.getBoolean("maths");
@@ -42,13 +41,12 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
-
     };
 
     @Override
     public void setDefaultSubjectValuesToUser(User user) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_ADD_DEFAULT_SUBJECT_VALUES_TO_USER)) {
+            PreparedStatement statement = connection.prepareStatement(SQL_ADD_DEFAULT_SUBJECT_VALUES_TO_USER)) {
             statement.setLong(1, user.getId());
             for (int i = 2; i <= 8; i++) {
                 statement.setBoolean(i, false);
@@ -62,7 +60,7 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
     @Override
     public void setSubjectValuesToUser(UserSubject userSubject) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_SET_SUBJECT_VALUE_TO_USER)) {
+            PreparedStatement statement = connection.prepareStatement(SQL_SET_SUBJECT_VALUE_TO_USER)) {
             statement.setBoolean(1, userSubject.isMaths());
             statement.setBoolean(2, userSubject.isPhysics());
             statement.setBoolean(3, userSubject.isProgramming());
@@ -80,7 +78,7 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
     @Override
     public List<Long> findAllUserIdBySubject(String subject) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USER_ID_BY_ + subject +" = true")) {
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USER_ID_BY_ + subject +" = true")) {
             List<Long> userIds = new ArrayList<>();
 
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -98,7 +96,7 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
     @Override
     public List<Long> findAllUserIdByMatchingSubjects(UserSubject userSubject) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USER_ID_BY_MATCHING_SUBJECTS)) {
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USER_ID_BY_MATCHING_SUBJECTS)) {
             List<Long> userIds = new ArrayList<>();
             statement.setBoolean(1, userSubject.isMaths());
             statement.setBoolean(2, userSubject.isMaths());
@@ -136,8 +134,7 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    UserSubject userSubject = userSubjectMapper.apply(resultSet);
-                    return userSubject;
+                    return userSubjectMapper.apply(resultSet);
                 } else {
                     return null;
                 }
@@ -150,14 +147,12 @@ public class UserSubjectRepositoryJdbcImpl implements UserSubjectRepository {
     @Override
     public boolean deleteUserById(Long id) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_DELETE_USER_BY_ID)) {
+            PreparedStatement statement = connection.prepareStatement(SQL_DELETE_USER_BY_ID)) {
             statement.setLong(1, id);
             statement.executeUpdate();
-
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
         return true;
     }
-
 }

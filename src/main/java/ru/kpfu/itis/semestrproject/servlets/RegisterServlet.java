@@ -46,11 +46,11 @@ public class RegisterServlet extends HttpServlet {
         md5.Update(password);
         String passwordHash = md5.asHex();
 
-        if (usersRepository.findByEmail(email)==null) {
+        if (usersRepository.findByEmail(email) == null) {
             User user = new User(name, surname, email, passwordHash, birthdate, gender, country, city);
             try {
                 if (usersRepository.registerUser(user)) {
-                    req.setAttribute("user",user);
+                    req.setAttribute("user", user);
                     Long id = usersRepository.findByEmail(email).getId();
                     user.setId(id);
                     userSubjectRepository.setDefaultSubjectValuesToUser(user);
